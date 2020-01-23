@@ -95,11 +95,16 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  position: relative;
+  background-color: #51f1e2;
+  height: 50px;
 }
 
 .container-nave .icon-nave {
+  position: absolute;
+  top: 0;
+  left: 0;
   font-size: 30px;
-  margin-left: 50%;
 }
 
 body {

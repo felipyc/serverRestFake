@@ -1,31 +1,34 @@
 
 let posicaoNaveX = {
   posicaoInicialAbsoluta: 0,
-  posicaoFinalMaxima: 0
+  posicaoFinalMaxima: 0,
+  posicaoAtual: 0,
 };
 
 let touchPosicao = {
   touch: 0,
-  deslizamento: 0
+  deslizamento: 0,
 }
 
 const containerNave = document.querySelector('.container-nave');
 const nave = document.querySelector('.container-nave .icon-nave');
-
+let marginLeft;
 function initNave(){
 
-    
+  nave.style.left = '50%';  
+
   posicaoNaveX.posicaoInicialAbsoluta = containerNave.getBoundingClientRect().left;
-  posicaoNaveX.posicaoFinalMaxima = containerNave.clientWidth - nave.clientWidth; 
+  posicaoNaveX.posicaoFinalMaxima = ((containerNave.clientWidth - nave.clientWidth) * 100) / containerNave.clientWidth; 
     
 
-    containerNave.addEventListener('touchstart', handleStart, false)
-    // containerNave.addEventListener("touchend", handleEnd, false);
-    // containerNave.addEventListener("touchcancel", handleCancel, false);
-    // containerNave.addEventListener("touchleave", handleEnd, false);
-    containerNave.addEventListener("touchmove", handleMove, false);
+  containerNave.addEventListener('touchstart', handleStart, false)
+  // containerNave.addEventListener("touchend", handleEnd, false);
+  // containerNave.addEventListener("touchcancel", handleCancel, false);
+  // containerNave.addEventListener("touchleave", handleEnd, false);
+  containerNave.addEventListener("touchmove", handleMove, false);
     
-    
+  
+  marginLeft = nave.style.left.replace('%', '').trim();
 
 }
 
@@ -33,47 +36,38 @@ export default initNave;
 
 function handleStart(evt) {
   evt.preventDefault();
-  console.clear();
-  console.log("touchstart.");
-  
   touchPosicao.touch = evt.touches[0].pageX;
-
+  touchPosicao.deslizamento = evt.touches[0].pageX;
 }
 
 function handleMove(evt) {
     evt.preventDefault();
-    console.clear();
-    console.log("touchmove.");
 
+    let touch = evt.touches[0];
+    
+    
 
-    touchPosicao.deslizamento = evt.touches[0].pageX >= 0 ? evt.touches[0].pageX : '';
+    touchPosicao.deslizamento = touch.pageX;
 
-    console.log('posicaoNaveX.posicaoInicialAbsoluta: ' + posicaoNaveX.posicaoInicialAbsoluta);
-    console.log('posicaoNaveX.posicaoFinalMaxima: ' + posicaoNaveX.posicaoFinalMaxima);
-    console.log('touchPosicao.touch: ' + touchPosicao.touch);
-    console.log('touchPosicao.deslizamento: ' + touchPosicao.deslizamento);
-    console.log(evt);
+    
 
-    //para esquerda
-    if( touchPosicao.touch > touchPosicao.deslizamento ){
-      // nave.style.marginLeft = `${nave.getBoundingClientRect().left-1}px`;
-      // touchPosicao.touch = evt.touches[0].pageX;
-      // console.log('esquerda');
-    //para direita
-    }else if( touchPosicao.touch < touchPosicao.deslizamento  ){
-      // nave.style.marginLeft = `${nave.getBoundingClientRect().left+1}px`;
-      // touchPosicao.touch = evt.touches[0].pageX;
-      console.log('direita');
+    
+    marginLeft = nave.style.left.replace('%', '').trim();
+    
+    
+    if( touchPosicao.touch > touchPosicao.deslizamento && marginLeft > 0 ){
+      //para esquerda
+      nave.style.left = `${+marginLeft-1}%`;
+      touchPosicao.touch = touch.pageX;
+      console.log(marginLeft-1);
+      console.log('esquerda');
+    }else if( touchPosicao.touch < touchPosicao.deslizamento && marginLeft < posicaoNaveX.posicaoFinalMaxima  ){
+      //para direita
+      nave.style.left = `${+marginLeft+1}%`;
+      touchPosicao.touch = touch.pageX;
     }else{
-      console.log(nave.getBoundingClientRect().left);
+      touchPosicao.touch = touch.pageX;
     }
-
-    if( touchPosicao.touch < touchPosicao.deslizamento && nave.getBoundingClientRect().left < posicaoNaveX.posicaoFinalMaxima ){
-      nave.style.marginLeft = `${nave.getBoundingClientRect().left+1}px`;
-      touchPosicao.touch = evt.touches[0].pageX;
-      console.log('direita');
-    }else {
-
-    }
+    
     
   }
