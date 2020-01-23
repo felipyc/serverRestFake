@@ -55,15 +55,15 @@ function handleMove(evt) {
     marginLeft = nave.style.left.replace('%', '').trim();
     
     
-    if( touchPosicao.touch > touchPosicao.deslizamento && marginLeft > 0 ){
+    if( touchPosicao.touch > touchPosicao.deslizamento && marginLeft > 3 ){
       //para esquerda
-      nave.style.left = `${+marginLeft-1}%`;
+      nave.style.left = `${+marginLeft-3}%`;
       touchPosicao.touch = touch.pageX;
       console.log(marginLeft-1);
       console.log('esquerda');
-    }else if( touchPosicao.touch < touchPosicao.deslizamento && marginLeft < posicaoNaveX.posicaoFinalMaxima  ){
+    }else if( touchPosicao.touch < touchPosicao.deslizamento && marginLeft < posicaoNaveX.posicaoFinalMaxima-3  ){
       //para direita
-      nave.style.left = `${+marginLeft+1}%`;
+      nave.style.left = `${+marginLeft+3}%`;
       touchPosicao.touch = touch.pageX;
     }else{
       touchPosicao.touch = touch.pageX;
