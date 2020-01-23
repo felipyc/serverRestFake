@@ -27,20 +27,20 @@ function initNave(){
     
   let clickTimer = null;
 
-  function touchStartDoubleClick() {
-      if (clickTimer == null) {
-          clickTimer = setTimeout(function () {
-              clickTimer = null;
-              alert("single");
+  // function touchStartDoubleClick() {
+  //     if (clickTimer == null) {
+  //         clickTimer = setTimeout(function () {
+  //             clickTimer = null;
+  //             alert("single");
 
-          }, 500)
-      } else {
-          clearTimeout(clickTimer);
-          clickTimer = null;
-          alert("double");
+  //         }, 500)
+  //     } else {
+  //         clearTimeout(clickTimer);
+  //         clickTimer = null;
+  //         alert("double");
 
-      }
-  }
+  //     }
+  // }
 
 }
 
@@ -62,13 +62,13 @@ function handleMove(evt) {
     marginLeft = nave.style.left.replace('%', '').trim();
     
     
-    if( touchPosicao.touch > touchPosicao.deslizamento && marginLeft > 3 ){
+    if( touchPosicao.touch > touchPosicao.deslizamento && marginLeft > 2 ){
       //para esquerda
-      nave.style.left = `${+marginLeft-3}%`;
+      nave.style.left = `${+marginLeft-2}%`;
       touchPosicao.touch = touch.pageX;
-    }else if( touchPosicao.touch < touchPosicao.deslizamento && marginLeft < posicaoFinalMaximaNave-3  ){
+    }else if( touchPosicao.touch < touchPosicao.deslizamento && marginLeft < posicaoFinalMaximaNave-2  ){
       //para direita
-      nave.style.left = `${+marginLeft+3}%`;
+      nave.style.left = `${+marginLeft+2}%`;
       touchPosicao.touch = touch.pageX;
     }else{
       touchPosicao.touch = touch.pageX;
