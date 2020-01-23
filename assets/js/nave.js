@@ -23,7 +23,7 @@ function initNave(){
   // containerNave.addEventListener("touchleave", handleEnd, false);
   containerNave.addEventListener("touchmove", handleMove, false);
 
-  containerNave.addEventListener('touchstart', touchStartDoubleClick, false)
+  // containerNave.addEventListener('touchstart', touchStartDoubleClick, false);
     
   let clickTimer = null;
 
