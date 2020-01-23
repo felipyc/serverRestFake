@@ -20,32 +20,95 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-caranguejo-natural:before {
+.icon-caranguejo-relaxado::before {
   content: "\0042";
+  color: #a20000;
+  -webkit-animation: iconCaranguejoRelaxadoDefensiva 1s infinite;
+          animation: iconCaranguejoRelaxadoDefensiva 1s infinite;
 }
 
-.icon-caranguejo-defensiva:before {
+.icon-caranguejo-defensiva::before {
   content: "\0043";
 }
 
-.icon-polvo-pequeno-natural:before {
+.icon-polvo-pequeno-relaxado::before {
   content: "\0044";
+  color: #72f2ff;
+  -webkit-animation: iconPolvoPequenoRelaxadoDefensiva 1s infinite;
+          animation: iconPolvoPequenoRelaxadoDefensiva 1s infinite;
 }
 
-.icon-polvo-pequeno-defensiva:before {
+.icon-polvo-pequeno-defensiva::before {
   content: "\0045";
 }
 
-.icon-polvo-grande-natural:before {
+.icon-polvo-grande-relaxado::before {
   content: "\0046";
+  color: #004eff;
+  -webkit-animation: iconPolvoGrandeRelaxadoDefensiva 1s infinite;
+          animation: iconPolvoGrandeRelaxadoDefensiva 1s infinite;
 }
 
-.icon-polvo-grande-defensiva:before {
-  content: "\0066";
+.icon-polvo-grande-defensiva::before {
+  content: "\0047";
 }
 
-.icon-nave:before {
+.icon-nave::before {
   content: "\0057";
+}
+
+@-webkit-keyframes iconCaranguejoRelaxadoDefensiva {
+  from {
+    content: "\0042";
+  }
+  to {
+    content: "\0043";
+  }
+}
+
+@keyframes iconCaranguejoRelaxadoDefensiva {
+  from {
+    content: "\0042";
+  }
+  to {
+    content: "\0043";
+  }
+}
+
+@-webkit-keyframes iconPolvoPequenoRelaxadoDefensiva {
+  from {
+    content: "\0044";
+  }
+  to {
+    content: "\0045";
+  }
+}
+
+@keyframes iconPolvoPequenoRelaxadoDefensiva {
+  from {
+    content: "\0044";
+  }
+  to {
+    content: "\0045";
+  }
+}
+
+@-webkit-keyframes iconPolvoGrandeRelaxadoDefensiva {
+  from {
+    content: "\0046";
+  }
+  to {
+    content: "\0047";
+  }
+}
+
+@keyframes iconPolvoGrandeRelaxadoDefensiva {
+  from {
+    content: "\0046";
+  }
+  to {
+    content: "\0047";
+  }
 }
 
 .container-game-playing {
@@ -84,7 +147,6 @@
       -ms-flex-align: center;
           align-items: center;
   margin-bottom: 5px;
-  background-color: #d7d7ff;
 }
 
 .container-aliens .span-alien {
@@ -114,6 +176,8 @@ body {
   margin: 0;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
-  background-color: red;
+  background-image: url("./../images/container-game-background-space-invaders.png");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
 }
 /*# sourceMappingURL=style.css.map */

@@ -21,25 +21,57 @@
     -moz-osx-font-smoothing: grayscale;
   }
   
-  .icon-caranguejo-natural:before {
+  .icon-caranguejo-relaxado::before {
     content: "\0042";
+    color: #a20000;
+    animation: iconCaranguejoRelaxadoDefensiva 1s infinite;
   }
-  .icon-caranguejo-defensiva:before {
+  .icon-caranguejo-defensiva::before {
     content: "\0043";
   }
-  .icon-polvo-pequeno-natural:before {
+  .icon-polvo-pequeno-relaxado::before {
     content: "\0044";
+    color: #72f2ff;
+    animation: iconPolvoPequenoRelaxadoDefensiva 1s infinite;
   }
-  .icon-polvo-pequeno-defensiva:before {
+  .icon-polvo-pequeno-defensiva::before {
     content: "\0045";
   }
-  .icon-polvo-grande-natural:before {
+  .icon-polvo-grande-relaxado::before {
     content: "\0046";
+    color: #004eff;
+    animation: iconPolvoGrandeRelaxadoDefensiva 1s infinite;
   }
-  .icon-polvo-grande-defensiva:before {
-    content: "\0066";
+  .icon-polvo-grande-defensiva::before {
+    content: "\0047";
   }
-  .icon-nave:before {
+  .icon-nave::before {
     content: "\0057";
   }
   
+  @keyframes iconCaranguejoRelaxadoDefensiva {
+    from {
+      content: "\0042";
+    }
+    to {
+      content: "\0043";
+    }
+  }
+
+  @keyframes iconPolvoPequenoRelaxadoDefensiva {
+    from {
+      content: "\0044";
+    }
+    to {
+      content: "\0045";
+    }
+  }
+
+  @keyframes iconPolvoGrandeRelaxadoDefensiva {
+    from {
+      content: "\0046";
+    }
+    to {
+      content: "\0047";
+    }
+  }

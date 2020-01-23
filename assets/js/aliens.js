@@ -4,9 +4,9 @@ function aliens(){
     
     const containerAliens = document.querySelector('.container-aliens');
     const aliensName = [
-        'icon-caranguejo-natural',
-        'icon-polvo-pequeno-natural',
-        'icon-polvo-grande-natural'
+        'icon-polvo-pequeno-relaxado',
+        'icon-caranguejo-relaxado',
+        'icon-polvo-grande-relaxado'
     ]
 
     for( let c = 1 ; c <= 10 ; c++ ){

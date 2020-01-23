@@ -1,9 +1,5 @@
 
-let posicaoNaveX = {
-  posicaoInicialAbsoluta: 0,
-  posicaoFinalMaxima: 0,
-  posicaoAtual: 0,
-};
+let posicaoFinalMaximaNave;
 
 let touchPosicao = {
   touch: 0,
@@ -17,8 +13,8 @@ function initNave(){
 
   nave.style.left = '50%';  
 
-  posicaoNaveX.posicaoInicialAbsoluta = containerNave.getBoundingClientRect().left;
-  posicaoNaveX.posicaoFinalMaxima = ((containerNave.clientWidth - nave.clientWidth) * 100) / containerNave.clientWidth; 
+  posicaoFinalMaximaNave = ((containerNave.clientWidth - nave.clientWidth) * 100) / containerNave.clientWidth; 
+  marginLeft = nave.style.left.replace('%', '').trim();
     
 
   containerNave.addEventListener('touchstart', handleStart, false)
@@ -26,9 +22,25 @@ function initNave(){
   // containerNave.addEventListener("touchcancel", handleCancel, false);
   // containerNave.addEventListener("touchleave", handleEnd, false);
   containerNave.addEventListener("touchmove", handleMove, false);
+
+  containerNave.addEventListener('touchstart', touchStartDoubleClick, false)
     
-  
-  marginLeft = nave.style.left.replace('%', '').trim();
+  let clickTimer = null;
+
+  function touchStartDoubleClick() {
+      if (clickTimer == null) {
+          clickTimer = setTimeout(function () {
+              clickTimer = null;
+              alert("single");
+
+          }, 500)
+      } else {
+          clearTimeout(clickTimer);
+          clickTimer = null;
+          alert("double");
+
+      }
+  }
 
 }
 
@@ -44,14 +56,9 @@ function handleMove(evt) {
     evt.preventDefault();
 
     let touch = evt.touches[0];
-    
-    
 
     touchPosicao.deslizamento = touch.pageX;
 
-    
-
-    
     marginLeft = nave.style.left.replace('%', '').trim();
     
     
@@ -59,9 +66,7 @@ function handleMove(evt) {
       //para esquerda
       nave.style.left = `${+marginLeft-3}%`;
       touchPosicao.touch = touch.pageX;
-      console.log(marginLeft-1);
-      console.log('esquerda');
-    }else if( touchPosicao.touch < touchPosicao.deslizamento && marginLeft < posicaoNaveX.posicaoFinalMaxima-3  ){
+    }else if( touchPosicao.touch < touchPosicao.deslizamento && marginLeft < posicaoFinalMaximaNave-3  ){
       //para direita
       nave.style.left = `${+marginLeft+3}%`;
       touchPosicao.touch = touch.pageX;
