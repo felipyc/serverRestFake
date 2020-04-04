@@ -41,15 +41,20 @@
 
 .container-nave {
     display: flex;
+    align-items: center;
     position: relative;
-    background-color: #51f1e2;
+    // background-color: #51f1e2;
     height: 50px;   
-    
     .icon-nave {
-        position: absolute;
-        top: 0;
-        left: 0;
-        font-size: 30px;
-        
+        // position: absolute;
+        // top: 0;
+        // left: 0;
+        // font-size: 30px;
+
+        width: 50px;
+        height: 50px;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 100% 100%;
     }
 }

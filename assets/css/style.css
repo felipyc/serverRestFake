@@ -53,10 +53,6 @@
   content: "\0047";
 }
 
-.icon-nave::before {
-  content: "\0057";
-}
-
 @-webkit-keyframes iconCaranguejoRelaxadoDefensiva {
   from {
     content: "\0042";
@@ -157,16 +153,19 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   position: relative;
-  background-color: #51f1e2;
   height: 50px;
 }
 
 .container-nave .icon-nave {
-  position: absolute;
-  top: 0;
-  left: 0;
-  font-size: 30px;
+  width: 50px;
+  height: 50px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100% 100%;
 }
 
 body {

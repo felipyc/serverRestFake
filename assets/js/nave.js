@@ -13,6 +13,8 @@ class Nave{
     }
     this.containerNave = document.querySelector('.container-nave');
     this.nave = document.querySelector('.container-nave .icon-nave');
+    this.skinNave = './assets/images/nave.gif';
+    this.nave.style.backgroundImage = `url(${this.skinNave})`;
     this.init();
   }
 
@@ -38,10 +40,10 @@ class Nave{
 
   calculoDoMovimento(clientX){
     const velocidadeNave = .8;
-    console.log(clientX);
-    console.log(this.movimentoTouch.inicial);
-    console.log(clientX - this.movimentoTouch.inicial);
-    const movimento = (clientX - this.movimentoTouch.inicial)*velocidadeNave;
+    // console.log(clientX);
+    // console.log(this.movimentoTouch.inicial);
+    // console.log(clientX - this.movimentoTouch.inicial);
+    const movimento = (clientX - this.movimentoTouch.inicial)*0.7;
     // movimento = Number.parseInt(movimento);
     // this.naveConfig.posicaoAtual = Number.parseInt(this.naveConfig.posicaoAtual);
     // console.log(this.naveConfig.posicaoAtual);
@@ -54,6 +56,9 @@ class Nave{
       this.movimentoTouch.movimentoFinal = movimento;
       return movimento;
     }
+
+    
+
     return this.movimentoTouch.movimentoFinal;
   }
 
