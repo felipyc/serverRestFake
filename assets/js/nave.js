@@ -1,78 +1,91 @@
 
-let posicaoFinalMaximaNave;
+class Nave{
 
-let touchPosicao = {
-  touch: 0,
-  deslizamento: 0,
-}
-
-const containerNave = document.querySelector('.container-nave');
-const nave = document.querySelector('.container-nave .icon-nave');
-let marginLeft;
-function initNave(){
-
-  nave.style.left = '50%';  
-
-  posicaoFinalMaximaNave = ((containerNave.clientWidth - nave.clientWidth) * 100) / containerNave.clientWidth; 
-  marginLeft = nave.style.left.replace('%', '').trim();
-    
-
-  containerNave.addEventListener('touchstart', handleStart, false)
-  // containerNave.addEventListener("touchend", handleEnd, false);
-  // containerNave.addEventListener("touchcancel", handleCancel, false);
-  // containerNave.addEventListener("touchleave", handleEnd, false);
-  containerNave.addEventListener("touchmove", handleMove, false);
-
-  // containerNave.addEventListener('touchstart', touchStartDoubleClick, false);
-    
-  let clickTimer = null;
-
-  // function touchStartDoubleClick() {
-  //     if (clickTimer == null) {
-  //         clickTimer = setTimeout(function () {
-  //             clickTimer = null;
-  //             alert("single");
-
-  //         }, 500)
-  //     } else {
-  //         clearTimeout(clickTimer);
-  //         clickTimer = null;
-  //         alert("double");
-
-  //     }
-  // }
-
-}
-
-export default initNave;
-
-function handleStart(evt) {
-  evt.preventDefault();
-  touchPosicao.touch = evt.touches[0].pageX;
-  touchPosicao.deslizamento = evt.touches[0].pageX;
-}
-
-function handleMove(evt) {
-    evt.preventDefault();
-
-    let touch = evt.touches[0];
-
-    touchPosicao.deslizamento = touch.pageX;
-
-    marginLeft = nave.style.left.replace('%', '').trim();
-    
-    
-    if( touchPosicao.touch > touchPosicao.deslizamento && marginLeft > 2 ){
-      //para esquerda
-      nave.style.left = `${+marginLeft-2}%`;
-      touchPosicao.touch = touch.pageX;
-    }else if( touchPosicao.touch < touchPosicao.deslizamento && marginLeft < posicaoFinalMaximaNave-2  ){
-      //para direita
-      nave.style.left = `${+marginLeft+2}%`;
-      touchPosicao.touch = touch.pageX;
-    }else{
-      touchPosicao.touch = touch.pageX;
+  constructor(){
+    this.naveConfig = {
+      posicaoAtual: 0,
+      limiteAteCantoDireito: 0,
     }
-    
-    
+    this.movimentoTouch = {
+      inicial: 0,
+      movimento: 0,
+      movimentoFinal: 0,
+    }
+    this.containerNave = document.querySelector('.container-nave');
+    this.nave = document.querySelector('.container-nave .icon-nave');
+    this.init();
   }
+
+  onStart(event){
+    event.preventDefault();
+    this.containerNave.addEventListener('touchmove', this.onMove);
+    this.containerNave.addEventListener('touchend', this.onEnd);
+    this.movimentoTouch.inicial = event.changedTouches[0].clientX;
+  }
+
+  onMove(event){
+    const clientX = event.changedTouches[0].clientX;
+    this.movimentoTouch.movimento = this.calculoDoMovimento( clientX );
+    this.movimentaNave( this.movimentoTouch.movimento );
+    debugger;
+  }
+  
+  onEnd(){
+    this.containerNave.removeEventListener('touchmove', this.onMove);
+    this.naveConfig.posicaoAtual += this.movimentoTouch.movimentoFinal;
+    this.movimentoTouch.movimentoFinal = 0;
+  }
+
+  calculoDoMovimento(clientX){
+    const velocidadeNave = .8;
+    console.log(clientX);
+    console.log(this.movimentoTouch.inicial);
+    console.log(clientX - this.movimentoTouch.inicial);
+    const movimento = (clientX - this.movimentoTouch.inicial)*velocidadeNave;
+    // movimento = Number.parseInt(movimento);
+    // this.naveConfig.posicaoAtual = Number.parseInt(this.naveConfig.posicaoAtual);
+    // console.log(this.naveConfig.posicaoAtual);
+    // console.log(movimento);
+    // console.log(this.naveConfig.posicaoAtual + movimento);
+    if( 
+      this.naveConfig.posicaoAtual + movimento >= 0 && 
+      this.naveConfig.posicaoAtual + movimento <= this.naveConfig.limiteAteCantoDireito 
+    ){
+      this.movimentoTouch.movimentoFinal = movimento;
+      return movimento;
+    }
+    return this.movimentoTouch.movimentoFinal;
+  }
+
+  movimentaNave(movimento){
+    this.nave.style.transform = `translate3d(${this.naveConfig.posicaoAtual+movimento}px,0,0)`;
+  }
+
+  bindEvents(){
+    this.onStart = this.onStart.bind(this);
+    this.onMove = this.onMove.bind(this);
+    this.onEnd = this.onEnd.bind(this);
+    this.eventosInicializacao = this.eventosInicializacao.bind(this);
+  }
+
+  eventosInicializacao(){
+    this.containerNave.addEventListener('touchstart', this.onStart);
+  }
+
+  calculaLimiteAteCantoDireito(){
+    const widthWrapperNave = this.containerNave.clientWidth;
+    const widthNave = this.nave.clientWidth;
+    this.naveConfig.limiteAteCantoDireito = widthWrapperNave - widthNave;
+  }
+
+  init(){
+    this.bindEvents();
+    this.calculaLimiteAteCantoDireito();
+    this.eventosInicializacao();
+
+  }
+
+}
+
+export default Nave;
+

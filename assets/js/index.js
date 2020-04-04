@@ -1,4 +1,5 @@
 import initAlien from './aliens.js';
-import initNave from './nave.js';
+import Nave from './nave.js';
 initAlien();
-initNave();
+
+const nave = new Nave();
